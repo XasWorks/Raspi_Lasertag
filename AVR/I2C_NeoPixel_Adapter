@@ -1,0 +1,63 @@
+#include <Adafruit_NeoPixel.h>
+#include <avr/power.h>
+
+#include <SPI.h>
+
+#define NUM_LED 16
+
+uint8_t   currentLED  = 0;
+uint8_t   cColorIndex = 0;
+uint32_t  nextColor   = 0;
+bool      updateStrip = false;
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LED, 6, NEO_GRB + NEO_KHZ800);
+
+ISR(TWI_vect) {
+  switch(TWSR) {
+    case 0x60:
+      nextColor   = 0;
+      cColorIndex = 0;
+      currentLED  = 0;
+    break;
+
+    case 0x80:
+      if(currentLED >= NUM_LED)
+        break;
+
+      nextColor <<= 8;
+      {
+        uint16_t addColor = TWDR*TWDR;
+        nextColor |=  addColor >> 8;
+      }
+      if(++cColorIndex < 3)
+        break;
+
+      strip.setPixelColor(currentLED++, nextColor);
+      cColorIndex = 0;
+      nextColor = 0;
+    break;
+
+    case 0xA0:
+      updateStrip = true;
+    default: break;
+  }
+
+  TWCR |= (1<< TWINT);
+}
+
+void setup() {
+  strip.begin();
+  strip.show();
+
+  TWAR = 0x10 << 1;
+  TWCR = (1<< TWEA | 1<< TWIE | 1<< TWEN);
+}
+
+void loop() {
+  if(updateStrip) {
+    TWCR &= ~(1<< TWEA);
+    strip.show();
+    TWCR |= (1<< TWEA);
+    updateStrip = false;
+  }
+}
