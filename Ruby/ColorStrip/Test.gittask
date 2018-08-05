@@ -1,0 +1,9 @@
+
+GitRestart::Task.new do |t|
+	t.name = "Strip Glow Test"
+
+	t.active = true;
+	t.watch(/.*/);
+
+	t.targets << "ruby start.rb"
+end

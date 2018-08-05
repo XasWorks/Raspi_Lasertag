@@ -1,0 +1,7 @@
+
+$runner = GitRestart::Runner.new do |r|
+	r.name = "Lasertag Server GitRestarter";
+	r.repo = "XasWorks/Raspi_Lasertag";
+
+	r.mqtt = "mqtt://xasin.hopto.org";
+end
