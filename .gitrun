@@ -4,4 +4,6 @@ $runner = GitRestart::Runner.new do |r|
 	r.repo = "XasWorks/Raspi_Lasertag";
 
 	r.mqtt = "mqtt://xasin.hopto.org";
+
+	r.start_on = "master"
 end
