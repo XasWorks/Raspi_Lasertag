@@ -23,6 +23,7 @@ at_exit {
 }
 
 def setPixel(pos, color)
+		pos %= 16;
 		3.times do |i|
 			diff = (pos - pos.floor);
 			$outData[pos.floor][i] = (1-diff)*color[i];
