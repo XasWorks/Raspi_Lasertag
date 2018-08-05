@@ -36,7 +36,7 @@ loop do
 
 	f = Time.now.to_f() * 2 * Math::PI;
 
-	setPixel(16 - ((Time.now().sec + Time.usec()/1000000)*16/60.0), [100 + 50*Math.sin(f), 0, 0]);
+	setPixel(16 - ((Time.now().sec + Time.now().usec()/1000000)*16/60.0), [100 + 50*Math.sin(f), 0, 0]);
 	setPixel(16 - (Time.now().min*16/60), [0, 100, 0]);
 
 	send($outData.flatten);
