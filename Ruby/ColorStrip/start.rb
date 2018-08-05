@@ -26,8 +26,8 @@ def setPixel(pos, color)
 		pos %= 16;
 		3.times do |i|
 			diff = (pos - pos.floor);
-			$outData[pos.floor][i] = (1-diff)*color[i];
-			$outData[(pos.floor + 1)%16][i] = diff*color[i];
+			$outData[pos.floor][i] += (1-diff)*color[i];
+			$outData[(pos.floor + 1)%16][i] += diff*color[i];
 		end
 end
 
