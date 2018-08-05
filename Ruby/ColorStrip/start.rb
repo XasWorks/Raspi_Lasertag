@@ -39,6 +39,7 @@ loop do
 
 	setPixel(16 - ((Time.now().sec + Time.now().usec()/1000000)*16/60.0), [100 + 50*Math.sin(f), 0, 0]);
 	setPixel(16 - (Time.now().min*16/60), [0, 100, 0]);
+	setPixel(16 - (Time.now().hour*16/24), [0, 0, 100]);
 
 	send($outData.flatten);
 	sleep 0.07;
