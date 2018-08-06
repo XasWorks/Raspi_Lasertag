@@ -31,8 +31,6 @@ def setPixel(pos, color)
 		end
 end
 
-raise "I failed!"
-
 loop do
 	$outData = [];
 	(16).times do $outData << [0, 0, 0]; end
