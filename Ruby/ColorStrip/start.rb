@@ -31,6 +31,8 @@ def setPixel(pos, color)
 		end
 end
 
+raise "I failed!"
+
 loop do
 	$outData = [];
 	(16).times do $outData << [0, 0, 0]; end
@@ -39,7 +41,7 @@ loop do
 
 	setPixel(0, [30, 30, 30]);
 
-	setPixel(16 - ((Time.now().sec + Time.now().usec()/1000000)*16/60.0), [100 + 50*Math.sin(f), 0, 0]);
+	setPixel(16 - ((Time.now().sec + Time.now().usec()/1000000.0)*16/60.0), [100 + 50*Math.sin(f), 0, 0]);
 	setPixel(16 - (Time.now().min*16.0/60), [0, 100, 0]);
 	setPixel(16 - (Time.now().hour*16.0/12), [0, 0, 100]);
 
