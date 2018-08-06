@@ -2,6 +2,8 @@
 GitRestart::Task.new do |t|
 	t.name = "Strip Glow Test"
 
+	t.report_status = true;
+
 	t.active = true;
 	t.watch(/.*/);
 
